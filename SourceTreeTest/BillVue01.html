@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2-directive</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 1. v-if 控制元素的显隐
+            v-if和v-show的区别:
+            v-if真正意义上从dom树中移除或增加元素
+            v-show只是控制元素的display样式
+         -->
+        <h2 v-if="false">我是v-if的h2标签</h2>
+        <h2 v-show="false">我是v-show的h2标签</h2>
+
+        <hr>
+
+        <!-- 2. v-for 循环渲染
+            语法:
+            v-for='(集合里的值, 下标) in 集合'
+            :key  vue是虚拟dom, 设置key可以提高浏览器的渲染效率, key的值一般给数据里能起到唯一标识作用的值, 如果没有, 也可以给index
+        -->
+        <ul>
+            <li v-for="(per, index) in infoArr" :key="index">
+                <span>这是第{{index+1}}个人的信息:</span>
+                <span>{{per.name}}</span>
+                <span>{{per.age}}</span>
+                <span>{{per.sex}}</span>
+            </li>
+        </ul>
+
+        <!--结合template标签实现v-for的列表渲染
+            template标签在渲染时不会被加载
+            template标签不能加key属性
+        -->
+        <ul>
+            <template v-for="(per, index) in infoArr">
+                <span>这是第{{index+1}}个人的信息:</span>
+                <span>{{per.name}}</span>
+                <span>{{per.age}}</span>
+                <span>{{per.sex}}</span>
+            </template>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        let app = new Vue({
+            el:"#app",
+            data:{
+                infoArr:[
+                    {name:'李白', age:20, sex:'男'},
+                    {name:'白居易', age:22, sex:'男'},
+                    {name:'李清照', age:18, sex:'女'},
+                    {name:'杜甫', age:30, sex:'男'},
+                    {name:'杨绛', age:20, sex:'女'}
+                ]
+            },
+            methods:{}
+        })
+    </script>
+</body>
+</html>
